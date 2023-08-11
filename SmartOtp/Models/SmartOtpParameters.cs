@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SmartOtp.Models;
 
-public class SmartOtp : INotifyPropertyChanged
+public class SmartOtpParameters : INotifyPropertyChanged
 {
     private OtpType _otpType = new();
     private AlgorithmsOtp _algorithmsOtp = new();

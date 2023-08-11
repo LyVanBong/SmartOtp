@@ -2,7 +2,6 @@
 using SmartOtp.Models;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
@@ -11,16 +10,15 @@ namespace SmartOtp;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    private Models.SmartOtp _smartOtp = new Models.SmartOtp();
+    private Models.SmartOtpParameters _smartOtpParameters = new Models.SmartOtpParameters();
     private SmartOtpCode _smartOtpCode = new SmartOtpCode();
-    private Totp _totp;
-    private Hotp _hotp;
+    private int _step = 30;
     public ICommand CreateOtpCommand { get; private set; }
 
-    public Models.SmartOtp SmartOtp
+    public Models.SmartOtpParameters SmartOtpParameters
     {
-        get => _smartOtp;
-        set => SetField(ref _smartOtp, value);
+        get => _smartOtpParameters;
+        set => SetField(ref _smartOtpParameters, value);
     }
 
     public SmartOtpCode SmartOtpCode
@@ -28,6 +26,7 @@ public class MainViewModel : INotifyPropertyChanged
         get => _smartOtpCode;
         set => SetField(ref _smartOtpCode, value);
     }
+
     public MainViewModel()
     {
         CreateOtpCommand = new Command(CreateOtp);
@@ -44,86 +43,87 @@ public class MainViewModel : INotifyPropertyChanged
         return Task.CompletedTask;
     }
 
-    private int _step = 30;
     private void RefreshSmartOtp(object state)
     {
         Debug.WriteLine("Timer: " + DateTime.Now);
-        if (SmartOtpCode.Hotp != null)
+
+        if (SmartOtpParameters.SecretKey == null) return;
+
+        if (SmartOtpCode.OtpType)
+        {
+            var totp = new Totp(secretKey: SecretKey(SmartOtpCode.SecretKey), mode: SmartOtpCode.Mode);
+
+            var remainingTime = totp.RemainingSeconds(DateTime.Now);
+            SmartOtpCode.TimeStep = remainingTime;
+            if (remainingTime == 1)
+            {
+                var totpCode = totp.ComputeTotp(DateTime.Now);
+
+                SmartOtpCode.OtpCode = totpCode;
+
+                Debug.WriteLine("totpCode: " + totpCode);
+            }
+        }
+        else
         {
             _step--;
-
+            SmartOtpCode.TimeStep = _step;
             if (_step == 1)
             {
-                var hotpCode = SmartOtpCode.Hotp.ComputeHOTP(SmartOtpCode.Counter);
+                var hotp = new Hotp(secretKey: SecretKey(SmartOtpCode.SecretKey), mode: SmartOtpCode.Mode);
+                var hotpCode = hotp.ComputeHOTP(SmartOtpCode.Counter);
                 Debug.WriteLine("hotpCode: " + hotpCode);
                 SmartOtpCode.OtpCode = hotpCode;
                 SmartOtpCode.Counter = long.Parse(hotpCode);
                 _step = 30;
-            }
-
-            SmartOtpCode.TimeStep = _step;
-        }
-        else if (SmartOtpCode.Totp != null)
-        {
-            var remainingTime = SmartOtpCode.Totp.RemainingSeconds(DateTime.Now);
-            SmartOtpCode.TimeStep = remainingTime;
-            if (remainingTime == 1)
-            {
-                var totpCode = SmartOtpCode.Totp.ComputeTotp(DateTime.Now);
-
-                SmartOtpCode.OtpCode = totpCode;
-
-                Debug.WriteLine("Otp: " + totpCode);
             }
         }
     }
 
     private void CreateOtp()
     {
-        if (!string.IsNullOrWhiteSpace(SmartOtp.SecretKey))
+        if (!string.IsNullOrWhiteSpace(SmartOtpParameters.SecretKey))
         {
-            if (SmartOtp.OtpType.Totp)
+            if (SmartOtpParameters.OtpType.Totp)
             {
-                var mode = OtpHashMode(SmartOtp.AlgorithmsOtp);
+                var mode = OtpHashMode(SmartOtpParameters.AlgorithmsOtp);
 
-                _totp = new Totp(secretKey: SecretKey(SmartOtp.SecretKey), mode: mode);
+                var totp = new Totp(secretKey: SecretKey(SmartOtpParameters.SecretKey), mode: mode);
 
-                var totpCode = _totp.ComputeTotp(DateTime.Now);
+                var totpCode = totp.ComputeTotp(DateTime.Now);
 
                 SmartOtpCode.OtpCode = totpCode;
 
-                var remainingTime = _totp.RemainingSeconds(DateTime.Now);
+                var remainingTime = totp.RemainingSeconds(DateTime.Now);
 
                 SmartOtpCode.TimeStep = remainingTime;
 
-                SmartOtp.SecretKey = SmartOtp.SecretKey;
+                SmartOtpCode.SecretKey = SmartOtpParameters.SecretKey;
                 SmartOtpCode.Mode = mode;
-                SmartOtpCode.Totp = _totp;
-                SmartOtpCode.Hotp = null;
+                SmartOtpCode.OtpType = true;
             }
-            else if (SmartOtp.OtpType.Hotp)
+            else if (SmartOtpParameters.OtpType.Hotp)
             {
                 SmartOtpCode.Counter = 30;
 
-                var mode = OtpHashMode(SmartOtp.AlgorithmsOtp);
+                var mode = OtpHashMode(SmartOtpParameters.AlgorithmsOtp);
 
-                _hotp = new Hotp(secretKey: SecretKey(SmartOtp.SecretKey), mode: mode);
+                var hotp = new Hotp(secretKey: SecretKey(SmartOtpParameters.SecretKey), mode: mode);
 
-                var hotpCode = _hotp.ComputeHOTP(SmartOtpCode.Counter);
+                var hotpCode = hotp.ComputeHOTP(SmartOtpCode.Counter);
 
                 SmartOtpCode.Counter = long.Parse(hotpCode);
                 SmartOtpCode.OtpCode = hotpCode;
-                SmartOtp.SecretKey = SmartOtp.SecretKey;
+                SmartOtpCode.SecretKey = SmartOtpParameters.SecretKey;
                 SmartOtpCode.Mode = mode;
-                SmartOtpCode.Totp = null;
-                SmartOtpCode.Hotp = _hotp;
+                SmartOtpCode.OtpType = false;
             }
         }
         else
         {
             Application.Current.MainPage.DisplayAlert("Thông báo", "khóa bảo mật không được trống !", "OK");
         }
-        SmartOtp.SecretKey = string.Empty;
+        SmartOtpParameters.SecretKey = string.Empty;
     }
 
     private byte[] SecretKey(string secretKey)

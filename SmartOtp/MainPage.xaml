@@ -17,13 +17,13 @@
             <Label
                 FontAttributes="Bold"
                 FontSize="18"
-                Text="Secret Key"
+                Text="Khóa bí mật"
                 TextColor="Black" />
 
             <Entry
                 ClearButtonVisibility="WhileEditing"
                 Placeholder="Nhập khóa bảo mật"
-                Text="{Binding SmartOtp.SecretKey}" />
+                Text="{Binding SmartOtpParameters.SecretKey}" />
 
             <Label
                 FontAttributes="Bold"
@@ -32,9 +32,9 @@
                 TextColor="Black" />
 
             <HorizontalStackLayout RadioButtonGroup.GroupName="algorithms ">
-                <RadioButton Content="Sha1" IsChecked="{Binding SmartOtp.AlgorithmsOtp.Sha1}" />
-                <RadioButton Content="Sha256" IsChecked="{Binding SmartOtp.AlgorithmsOtp.Sha256}" />
-                <RadioButton Content="Sha512" IsChecked="{Binding SmartOtp.AlgorithmsOtp.Sha512}" />
+                <RadioButton Content="Sha1" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha1}" />
+                <RadioButton Content="Sha256" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha256}" />
+                <RadioButton Content="Sha512" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha512}" />
             </HorizontalStackLayout>
 
             <Label
@@ -44,11 +44,11 @@
                 TextColor="Black" />
 
             <HorizontalStackLayout RadioButtonGroup.GroupName="otpnet ">
-                <RadioButton Content="TOTP" IsChecked="{Binding SmartOtp.OtpType.Totp}" />
-                <RadioButton Content="HOTP" IsChecked="{Binding SmartOtp.OtpType.Hotp}" />
+                <RadioButton Content="TOTP" IsChecked="{Binding SmartOtpParameters.OtpType.Totp}" />
+                <RadioButton Content="HOTP" IsChecked="{Binding SmartOtpParameters.OtpType.Hotp}" />
             </HorizontalStackLayout>
 
-            <Button Command="{Binding CreateOtpCommand}" Text="Thêm SmartOtp" />
+            <Button Command="{Binding CreateOtpCommand}" Text="Tạo mã" />
 
             <BoxView
                 Margin="0,20,0,0"
@@ -70,8 +70,6 @@
                     Text="{Binding SmartOtpCode.TimeStep}"
                     TextColor="Black" />
             </Grid>
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
