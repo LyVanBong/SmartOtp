@@ -3,11 +3,11 @@
     x:Class="SmartOtp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SmartOtp"
+    xmlns:views="clr-namespace:SmartOtp.Views"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate views:HomeView}"
+        Route="HomeView" />
 </Shell>

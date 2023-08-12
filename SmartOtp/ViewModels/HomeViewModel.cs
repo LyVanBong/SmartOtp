@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 
-namespace SmartOtp;
+namespace SmartOtp.ViewModels;
 
-public class MainViewModel : INotifyPropertyChanged
+public class HomeViewModel : INotifyPropertyChanged
 {
     private Models.SmartOtpParameters _smartOtpParameters = new Models.SmartOtpParameters();
     private SmartOtpCode _smartOtpCode = new SmartOtpCode();
@@ -27,7 +27,7 @@ public class MainViewModel : INotifyPropertyChanged
         set => SetField(ref _smartOtpCode, value);
     }
 
-    public MainViewModel()
+    public HomeViewModel()
     {
         CreateOtpCommand = new Command(CreateOtp);
 
