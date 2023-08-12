@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
-
-namespace SmartOtp
+﻿namespace SmartOtp
 {
     public static class MauiProgram
     {

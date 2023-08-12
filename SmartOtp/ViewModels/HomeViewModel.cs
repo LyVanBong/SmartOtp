@@ -1,12 +1,4 @@
-﻿using OtpNet;
-using SmartOtp.Models;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
-
-namespace SmartOtp.ViewModels;
+﻿namespace SmartOtp.ViewModels;
 
 public class HomeViewModel : INotifyPropertyChanged
 {

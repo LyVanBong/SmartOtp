@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace SmartOtp.Models;
+﻿namespace SmartOtp.Models;
 
 public class OtpType : INotifyPropertyChanged
 {
