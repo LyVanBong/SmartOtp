@@ -1,6 +1,6 @@
 ﻿namespace SmartOtp.Views;
 
-public partial class HomeView : ContentPage
+public partial class HomeView : ContentPageBase
 {
     public HomeView()
     {

@@ -1,8 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage
+<views:ContentPageBase
     x:Class="SmartOtp.Views.SettingsView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <ContentPage.Content />
-</ContentPage>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:SmartOtp.Views">
+    <views:ContentPageBase.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="30,10" Spacing="10">
+                <VerticalStackLayout.Resources>
+                    <ResourceDictionary>
+                        <Style TargetType="Label">
+                            <Setter Property="FontAttributes" Value="Bold" />
+                            <Setter Property="FontSize" Value="18" />
+                            <Setter Property="VerticalOptions" Value="Center" />
+                            <Setter Property="TextColor" Value="Black" />
+                        </Style>
+                    </ResourceDictionary>
+                </VerticalStackLayout.Resources>
+                <Label Text="Hash Algorithms" />
+                <HorizontalStackLayout
+                    Margin="0"
+                    Padding="0"
+                    Spacing="10">
+                    <HorizontalStackLayout.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label">
+                                <Setter Property="FontAttributes" Value="Bold" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="TextColor" Value="Black" />
+                                <Setter Property="VerticalOptions" Value="Center" />
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                            </Style>
+                        </ResourceDictionary>
+                    </HorizontalStackLayout.Resources>
+                    <RadioButton Content="Sha1" IsChecked="{Binding IsSha1}" />
+                    <RadioButton Content="Sha256" IsChecked="{Binding IsSha256}" />
+                    <RadioButton Content="Sha512" IsChecked="{Binding IsSha512}" />
+                </HorizontalStackLayout>
+                <Label Text="Time Step" />
+                <Entry
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Numeric"
+                    Placeholder="30"
+                    PlaceholderColor="Black"
+                    Text="{Binding TimeStep}"
+                    TextColor="Black" />
+                <Label Text="Otp Size" />
+                <Entry
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Numeric"
+                    Placeholder="6"
+                    PlaceholderColor="Black"
+                    Text="{Binding OtpLength}"
+                    TextColor="Black" />
+                <Label Text="Otp Type" />
+                <HorizontalStackLayout
+                    Margin="0"
+                    Padding="0"
+                    Spacing="10">
+                    <HorizontalStackLayout.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label">
+                                <Setter Property="FontAttributes" Value="Bold" />
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="TextColor" Value="Black" />
+                                <Setter Property="VerticalOptions" Value="Center" />
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                            </Style>
+                        </ResourceDictionary>
+                    </HorizontalStackLayout.Resources>
+                    <RadioButton Content="Totp" IsChecked="{Binding IsTotp}" />
+                    <RadioButton Content="Hotp" IsChecked="{Binding IsHotp}" />
+                </HorizontalStackLayout>
+
+                <Button
+                    Command="{Binding SaveSettingsCommand}"
+                    CornerRadius="5"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="Save"
+                    TextColor="White" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </views:ContentPageBase.Content>
+</views:ContentPageBase>
