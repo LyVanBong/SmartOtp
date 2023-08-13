@@ -1,6 +1,4 @@
-﻿using SmartOtp.Views;
-
-namespace SmartOtp
+﻿namespace SmartOtp
 {
     public partial class AppShell : Shell
     {
@@ -9,12 +7,15 @@ namespace SmartOtp
             AppShell.InitializeRouting();
             InitializeComponent();
         }
+
         /// <summary>
         /// Register all routes
         /// </summary>
         private static void InitializeRouting()
         {
-            Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
+            Routing.RegisterRoute(Routes.Settings, typeof(SettingsView));
+            Routing.RegisterRoute(Routes.AddCode, typeof(AddCodeView));
+            Routing.RegisterRoute(Routes.Home, typeof(HomeView));
         }
     }
 }

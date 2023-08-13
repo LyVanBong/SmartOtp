@@ -12,6 +12,7 @@
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Awesome5ProSolid.otf", "Awesome5ProSolid");
                 })
                 .RegisterAppServices()
                 .RegisterViewModels()
@@ -23,6 +24,7 @@
 
             return builder.Build();
         }
+
         /// <summary>
         /// Register all services
         /// </summary>
@@ -30,10 +32,11 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
         {
-
-
+            mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
+            mauiAppBuilder.Services.AddSingleton<INavigationService, NavigationService>();
             return mauiAppBuilder;
         }
+
         /// <summary>
         /// Register all view models
         /// </summary>
@@ -41,9 +44,12 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
-
+            mauiAppBuilder.Services.AddTransient<SettingsViewModel>();
+            mauiAppBuilder.Services.AddTransient<AddCodeViewModel>();
+            mauiAppBuilder.Services.AddTransient<HomeViewModel>();
             return mauiAppBuilder;
         }
+
         /// <summary>
         /// Register all views
         /// </summary>
@@ -51,9 +57,10 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
         {
-
+            mauiAppBuilder.Services.AddTransient<AddCodeView>();
+            mauiAppBuilder.Services.AddTransient<SettingsView>();
+            mauiAppBuilder.Services.AddTransient<HomeView>();
             return mauiAppBuilder;
         }
-
     }
 }

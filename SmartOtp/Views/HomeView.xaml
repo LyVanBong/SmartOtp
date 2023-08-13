@@ -3,74 +3,20 @@
 <ContentPage
     x:Class="SmartOtp.Views.HomeView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:SmartOtp.ViewModels"
-    Title="SmartOTP">
-    <ContentPage.BindingContext>
-        <viewModels:HomeViewModel />
-    </ContentPage.BindingContext>
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="5"
-            VerticalOptions="Start">
-
-            <Label
-                FontAttributes="Bold"
-                FontSize="18"
-                Text="Khóa bí mật"
-                TextColor="Black" />
-
-            <Entry
-                ClearButtonVisibility="WhileEditing"
-                Placeholder="Nhập khóa bảo mật"
-                Text="{Binding SmartOtpParameters.SecretKey}" />
-
-            <Label
-                FontAttributes="Bold"
-                FontSize="18"
-                Text="Loại mã hóa"
-                TextColor="Black" />
-
-            <HorizontalStackLayout RadioButtonGroup.GroupName="algorithms ">
-                <RadioButton Content="Sha1" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha1}" />
-                <RadioButton Content="Sha256" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha256}" />
-                <RadioButton Content="Sha512" IsChecked="{Binding SmartOtpParameters.AlgorithmsOtp.Sha512}" />
-            </HorizontalStackLayout>
-
-            <Label
-                FontAttributes="Bold"
-                FontSize="18"
-                Text="Loai otp"
-                TextColor="Black" />
-
-            <HorizontalStackLayout RadioButtonGroup.GroupName="otpnet ">
-                <RadioButton Content="TOTP" IsChecked="{Binding SmartOtpParameters.OtpType.Totp}" />
-                <RadioButton Content="HOTP" IsChecked="{Binding SmartOtpParameters.OtpType.Hotp}" />
-            </HorizontalStackLayout>
-
-            <Button Command="{Binding CreateOtpCommand}" Text="Tạo mã" />
-
-            <BoxView
-                Margin="0,20,0,0"
-                BackgroundColor="Black"
-                HeightRequest="1" />
-
-            <Grid ColumnDefinitions="*,Auto">
-                <Label
-                    Grid.Column="0"
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    Text="{Binding SmartOtpCode.OtpCode}"
-                    TextColor="Black" />
-                <Label
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    HorizontalOptions="End"
-                    Text="{Binding SmartOtpCode.TimeStep}"
-                    TextColor="Black" />
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Clicked="MenuItem_OnClicked"
+            IconImageSource="icons_search.png"
+            Text="Search" />
+    </ContentPage.ToolbarItems>
+    <Shell.SearchHandler>
+        <SearchHandler
+            x:Name="SearchHandler"
+            BackgroundColor="White"
+            Placeholder="Search code"
+            Query="{Binding SearchText}"
+            SearchBoxVisibility="Hidden"
+            Unfocused="SearchHandler_OnUnfocused" />
+    </Shell.SearchHandler>
 </ContentPage>
