@@ -2,6 +2,7 @@
 
 public interface IViewModelBase : IQueryAttributable
 {
+    public string Title { get; set; }
     public INavigationService NavigationService { get; }
 
     public IAsyncRelayCommand InitializeAsyncCommand { get; }

@@ -2,8 +2,9 @@
 
 public partial class AddCodeView : ContentPageBase
 {
-    public AddCodeView()
+    public AddCodeView(AddCodeViewModel addCodeViewModel)
     {
+        BindingContext = addCodeViewModel;
         InitializeComponent();
     }
 }

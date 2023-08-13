@@ -63,6 +63,7 @@ public class SettingsViewModel : ViewModelBase
     public ICommand SaveSettingsCommand { get; private set; }
     public SettingsViewModel(INavigationService navigationService, ISettingsService settingsService) : base(navigationService)
     {
+        Title = "Settings";
         _settingsService = settingsService;
         SaveSettingsCommand = new AsyncRelayCommand(SaveSettings);
     }

@@ -68,12 +68,27 @@
 	  <Compile Update="Views\AddCodeView.xaml.cs">
 	    <DependentUpon>AddCodeView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\CreateQrCodeView.xaml.cs">
+	    <DependentUpon>CreateQrCodeView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\HomeView.xaml.cs">
 	    <DependentUpon>HomeView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ScanQrCodeView.xaml.cs">
+	    <DependentUpon>ScanQrCodeView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\SettingsView.xaml.cs">
 	    <DependentUpon>SettingsView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\SetupCodeView.xaml.cs">
+	    <DependentUpon>SetupCodeView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\CreateQrCodeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -3,21 +3,28 @@
 public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
 {
     private long _isBusy;
-
-    public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
-
     [ObservableProperty]
     private bool _isInitialized;
+    private readonly INavigationService _navigationService;
+    private readonly IAsyncRelayCommand _initializeAsyncCommand;
+    private string _title;
+    public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
 
-    public INavigationService NavigationService { get; }
+    public string Title
+    {
+        get => _title;
+        set => SetProperty(ref _title, value);
+    }
 
-    public IAsyncRelayCommand InitializeAsyncCommand { get; }
+    public INavigationService NavigationService => _navigationService;
+
+    public IAsyncRelayCommand InitializeAsyncCommand => _initializeAsyncCommand;
 
     public ViewModelBase(INavigationService navigationService)
     {
-        NavigationService = navigationService;
+        _navigationService = navigationService;
 
-        InitializeAsyncCommand =
+        _initializeAsyncCommand =
             new AsyncRelayCommand(
                 async () =>
                 {
