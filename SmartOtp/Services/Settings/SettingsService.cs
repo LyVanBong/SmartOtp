@@ -2,14 +2,13 @@
 
 public class SettingsService : ISettingsService
 {
-    #region Settings Constants
-
-
-
-    #endregion
-
     #region Settings Properties
 
+    public long Counter
+    {
+        get => Preferences.Get(nameof(Counter), 0L);
+        set => Preferences.Set(nameof(Counter), value);
+    }
     public bool IsSha1
     {
         get => Preferences.Get(nameof(IsSha1), true);
@@ -26,15 +25,15 @@ public class SettingsService : ISettingsService
         get => Preferences.Get(nameof(IsSha512), false);
         set => Preferences.Set(nameof(IsSha512), value);
     }
-    public int OtpLength
+    public int Digits
     {
-        get => Preferences.Get(nameof(OtpLength), 6);
-        set => Preferences.Set(nameof(OtpLength), value);
+        get => Preferences.Get(nameof(Digits), 6);
+        set => Preferences.Set(nameof(Digits), value);
     }
-    public int TimeStep
+    public int Period
     {
-        get => Preferences.Get(nameof(TimeStep), 30);
-        set => Preferences.Set(nameof(TimeStep), value);
+        get => Preferences.Get(nameof(Period), 30);
+        set => Preferences.Set(nameof(Period), value);
     }
     public bool IsTotp
     {
@@ -49,43 +48,25 @@ public class SettingsService : ISettingsService
 
     #endregion
 
-    #region Constructor
-
-    public SettingsService()
-    {
-        
-    }
-
-    #endregion
-
     #region Settings Methods
 
-    public void SaveSettings(bool isSha1, bool isSha256, bool isSha512, bool isTotp, bool isHotp, int timeStep, int otpLength)
+    public void SaveSettings(bool isSha1 = true,
+        bool isSha256 = false,
+        bool isSha512 = false,
+        bool isTotp = true,
+        bool isHotp = false,
+        int period = 30,
+        int digits = 6,
+        long counter = 0)
     {
         IsSha1 = isSha1;
         IsSha256 = isSha256;
         IsSha512 = isSha512;
         IsTotp = isTotp;
         IsHotp = isHotp;
-        TimeStep = timeStep;
-        OtpLength = otpLength;
-    }
-    public OtpHashMode GetOtpHashModeAsync()
-    {
-        if (IsSha256)
-            return OtpHashMode.Sha256;
-        else if (IsSha512)
-            return OtpHashMode.Sha512;
-        else
-            return OtpHashMode.Sha1;
-    }
-
-    public bool GetTotpTypeAsync()
-    {
-        if (IsTotp)
-            return true;
-        else
-            return false;
+        Period = period;
+        Digits = digits;
+        Counter = counter;
     }
 
     #endregion

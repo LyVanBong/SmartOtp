@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace SmartOtp.ViewModels;
+﻿namespace SmartOtp.ViewModels;
 
 public class AddCodeViewModel : ViewModelBase
 {

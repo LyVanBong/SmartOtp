@@ -1,7 +1,4 @@
 ﻿using System.Threading;
-using System.Windows.Input;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 using Microsoft.Maui;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -73,8 +70,8 @@ public class SettingsViewModel : ViewModelBase
         IsSha1 = _settingsService.IsSha1;
         IsSha256 = _settingsService.IsSha256;
         IsSha512 = _settingsService.IsSha512;
-        OtpLength = _settingsService.OtpLength;
-        TimeStep = _settingsService.TimeStep;
+        OtpLength = _settingsService.Digits;
+        TimeStep = _settingsService.Period;
         IsTotp = _settingsService.IsTotp;
         IsHotp = _settingsService.IsHotp;
         return base.InitializeAsync();
@@ -82,7 +79,13 @@ public class SettingsViewModel : ViewModelBase
 
     private async Task SaveSettings()
     {
-        _settingsService.SaveSettings(IsSha1, IsSha256, IsSha512, IsTotp, IsHotp, TimeStep, OtpLength);
+        _settingsService.SaveSettings(IsSha1,
+        IsSha256,
+        IsSha512,
+        IsTotp,
+        IsHotp,
+        TimeStep,
+        OtpLength);
         var toast = Toast.Make("Update done", ToastDuration.Long, 14);
         await toast.Show();
     }

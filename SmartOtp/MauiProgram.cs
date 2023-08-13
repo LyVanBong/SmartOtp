@@ -1,4 +1,6 @@
-﻿namespace SmartOtp
+﻿using SmartOtp.Services.Otp;
+
+namespace SmartOtp
 {
     public static class MauiProgram
     {
@@ -32,8 +34,11 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
         {
+            mauiAppBuilder.Services.AddSingleton<IOtpService, OtpService>();
             mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
             mauiAppBuilder.Services.AddSingleton<INavigationService, NavigationService>();
+
+            mauiAppBuilder.Services.AddSingleton<IDatabaseService, DatabaseService>();
             return mauiAppBuilder;
         }
 

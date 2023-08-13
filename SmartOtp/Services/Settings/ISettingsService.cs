@@ -2,11 +2,12 @@
 
 public interface ISettingsService
 {
+    public long Counter { get; set; }
     public bool IsSha1 { get; set; }
     public bool IsSha256 { get; set; }
     public bool IsSha512 { get; set; }
-    public int OtpLength { get; set; }
-    public int TimeStep { get; set; }
+    public int Digits { get; set; }
+    public int Period { get; set; }
     public bool IsTotp { get; set; }
     public bool IsHotp { get; set; }
     /// <summary>
@@ -17,21 +18,15 @@ public interface ISettingsService
     /// <param name="isSha512"></param>
     /// <param name="isTotp"></param>
     /// <param name="isHotp"></param>
-    /// <param name="timeStep"></param>
-    /// <param name="otpLength"></param>
-    void SaveSettings(bool isSha1, bool isSha256, bool isSha512, bool isTotp, bool isHotp, int timeStep, int otpLength);
-    /// <summary>
-    /// Otp hash mode
-    /// </summary>
-    /// <returns>
-    /// sha1, sha256 or sha512
-    /// </returns>
-    OtpHashMode GetOtpHashModeAsync();
-    /// <summary>
-    /// Otp type
-    /// </summary>
-    /// <returns>
-    /// True if TOTP, false if HOTP
-    /// </returns>
-    bool GetTotpTypeAsync();
+    /// <param name="period"></param>
+    /// <param name="digits"></param>
+    /// <param name="counter"></param>
+    void SaveSettings(bool isSha1 = true,
+        bool isSha256 = false,
+        bool isSha512 = false,
+        bool isTotp = true,
+        bool isHotp = false,
+        int period = 30,
+        int digits = 6,
+        long counter = 0);
 }

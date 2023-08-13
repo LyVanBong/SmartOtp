@@ -1,11 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:SmartOtp.Views"
-             Title="{Binding Title}"
-             x:Class="SmartOtp.Views.SetupCodeView">
+<views:ContentPageBase
+    x:Class="SmartOtp.Views.SetupCodeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:SmartOtp.Views"
+    Title="{Binding Title}">
     <views:ContentPageBase.Content>
-        
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="Issuer" />
+            <Entry
+                Keyboard="Text"
+                Placeholder="Enter Issuer"
+                Text="{Binding Issuer}" />
+            <Label Text="User" />
+            <Entry
+                Keyboard="Text"
+                Placeholder="Enter User"
+                Text="{Binding User}" />
+            <Label Text="Secret" />
+            <Entry
+                Keyboard="Text"
+                Placeholder="Enter Secret"
+                Text="{Binding Secret}" />
+            <Button Command="{Binding AddCodeCommnad}" Text="Add" />
+        </VerticalStackLayout>
     </views:ContentPageBase.Content>
 </views:ContentPageBase>
