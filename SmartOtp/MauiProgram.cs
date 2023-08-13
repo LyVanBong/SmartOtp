@@ -1,6 +1,4 @@
-﻿using SmartOtp.Services.Otp;
-
-namespace SmartOtp
+﻿namespace SmartOtp
 {
     public static class MauiProgram
     {

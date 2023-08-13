@@ -18,4 +18,5 @@ global using CommunityToolkit.Maui.Alerts;
 global using CommunityToolkit.Maui.Core;
 global using SmartOtp.Models;
 global using SmartOtp.Services.Database;
+global using SmartOtp.Services.Otp;
 global using SQLite;

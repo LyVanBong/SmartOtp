@@ -1,6 +1,4 @@
-﻿using SmartOtp.Services.Otp;
-
-namespace SmartOtp.ViewModels;
+﻿namespace SmartOtp.ViewModels;
 
 public class SetupCodeViewModel : ViewModelBase
 {

@@ -2,13 +2,23 @@
 [Table(nameof(SmartOtpModel))]
 public class SmartOtpModel : ObservableObject
 {
-    private string _otp;
+    private string _otp = "999999";
     private string _issuer;
     private string _user;
+    private int _periodView = 30;
+    private float _progress = .5f;
 
     [PrimaryKey]
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    [Ignore]
+    public float Progress
+    {
+        get => _progress;
+        set => SetProperty(ref _progress, value);
+    }
+
+    [Ignore]
     public string Otp
     {
         get => _otp;
@@ -30,8 +40,14 @@ public class SmartOtpModel : ObservableObject
     public string Secret { get; set; }
     public int Digits { get; set; }
     public int Period { get; set; }
+
     [Ignore]
-    public int PeriodView { get; set; }
+    public int PeriodView
+    {
+        get => _periodView;
+        set => SetProperty(ref _periodView, value);
+    }
+
     public long Counter { get; set; }
     public DateTime CreateTime { get; set; } = DateTime.Now;
     // HashType
