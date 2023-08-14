@@ -10,6 +10,7 @@ public class SmartOtpModel : ObservableObject
     private string _user;
     private int _periodView = 30;
     private float _progress = .5f;
+    private long _counter;
 
     [PrimaryKey]
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -51,7 +52,12 @@ public class SmartOtpModel : ObservableObject
         set => SetProperty(ref _periodView, value);
     }
 
-    public long Counter { get; set; }
+    public long Counter
+    {
+        get => _counter;
+        set => SetProperty(ref _counter, value);
+    }
+
     public DateTime CreateTime { get; set; } = DateTime.Now;
 
     // HashType
@@ -86,13 +92,14 @@ public class SmartOtpModel : ObservableObject
         return Encoding.UTF8.GetBytes(Secret);
     }
 
-    public void UpdateHotp(string otp = null)
+    public void UpdateHotp(string otp)
     {
         PeriodView--;
+        Issuer = "HOTP";
         Progress = (float)PeriodView / Period;
+        Otp = otp;
         if (PeriodView == 1)
         {
-            Otp = otp;
             Counter = long.Parse(Otp);
             PeriodView = Period;
         }
@@ -101,6 +108,7 @@ public class SmartOtpModel : ObservableObject
     public void UpdateTotp(string otp = null, int period = 0)
     {
         PeriodView = period;
+        Issuer = "TOTP";
         Otp = otp;
         Progress = (float)PeriodView / Period;
     }

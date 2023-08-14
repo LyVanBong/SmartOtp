@@ -71,13 +71,107 @@
                     <RadioButton Content="Totp" IsChecked="{Binding IsTotp}" />
                     <RadioButton Content="Hotp" IsChecked="{Binding IsHotp}" />
                 </HorizontalStackLayout>
-
+                <Label Text="Secret" />
+                <Entry
+                    Keyboard="Text"
+                    Placeholder="Enter Secret"
+                    Text="{Binding Secret}" />
                 <Button
                     Command="{Binding SaveSettingsCommand}"
                     CornerRadius="5"
                     FontAttributes="Bold"
-                    Text="Save"
+                    Text="Add Code"
                     TextColor="White" />
+                <CollectionView
+                    x:Name="CollectionView"
+                    ItemsSource="{Binding SmartOtpModels}"
+                    SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Padding="20" Spacing="20">
+                            <Label HorizontalOptions="Center" Text="You don't have an otp code yet, you can add it here" />
+                            <Button Command="{Binding AddCodeCommand}" Text="Add Code" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Margin="0"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                ColumnDefinitions="*,Auto,60"
+                                ColumnSpacing="10"
+                                RowDefinitions="Auto,Auto,*,3"
+                                RowSpacing="0">
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontSize="18"
+                                    Text="{Binding Issuer}"
+                                    TextColor="Red" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontSize="12"
+                                    IsVisible="False"
+                                    Text="{Binding Counter}"
+                                    TextColor="Gray">
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsTotp}"
+                                            TargetType="Label"
+                                            Value="false">
+                                            <Setter Property="Label.IsVisible" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    Text="{Binding Otp}"
+                                    TextColor="Black"
+                                    ToolTipProperties.Text="Copy to clipboard">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference CollectionView}, Path=BindingContext.SelectCodeCommand}" CommandParameter="{Binding Otp}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="Fill"
+                                    Source="icons_copy.png"
+                                    ToolTipProperties.Text="Copy to clipboard"
+                                    VerticalOptions="Fill">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference CollectionView}, Path=BindingContext.SelectCodeCommand}" CommandParameter="{Binding Otp}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="2"
+                                    FontSize="30"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding PeriodView}"
+                                    TextColor="Black"
+                                    VerticalOptions="Fill"
+                                    VerticalTextAlignment="Center" />
+                                <ProgressBar
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    BackgroundColor="WhiteSmoke"
+                                    HorizontalOptions="Fill"
+                                    Progress="{Binding Progress}"
+                                    VerticalOptions="Fill" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
     </views:ContentPageBase.Content>
