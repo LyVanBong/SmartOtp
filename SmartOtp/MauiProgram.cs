@@ -47,6 +47,7 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
+            mauiAppBuilder.Services.AddTransient<HotpViewModel>();
             mauiAppBuilder.Services.AddTransient<CreateQrCodeViewModel>();
             mauiAppBuilder.Services.AddTransient<ScanQrCodeViewModel>();
             mauiAppBuilder.Services.AddTransient<SetupCodeViewModel>();
@@ -63,6 +64,7 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
         {
+            mauiAppBuilder.Services.AddTransient<HotpView>();
             mauiAppBuilder.Services.AddTransient<CreateQrCodeView>();
             mauiAppBuilder.Services.AddTransient<SetupCodeView>();
             mauiAppBuilder.Services.AddTransient<ScanQrCodeView>();

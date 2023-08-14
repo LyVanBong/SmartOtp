@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace SmartOtp.ViewModels;
+﻿namespace SmartOtp.ViewModels;
 
 public class HomeViewModel : ViewModelBase
 {

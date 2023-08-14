@@ -5,10 +5,10 @@ namespace SmartOtp.Models;
 [Table(nameof(SmartOtpModel))]
 public class SmartOtpModel : ObservableObject
 {
-    private string _otp = "999999";
+    private string _otp = "";
     private string _issuer;
     private string _user;
-    private int _periodView = 30;
+    private int _periodView;
     private float _progress = .5f;
     private long _counter;
 
@@ -41,7 +41,7 @@ public class SmartOtpModel : ObservableObject
         set => SetProperty(ref _user, value);
     }
 
-    public string Secret { get; set; }
+    public string Secret { get; set; } = string.Empty;
     public int Digits { get; set; }
     public int Period { get; set; }
 

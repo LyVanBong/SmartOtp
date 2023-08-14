@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <views:ContentPageBase
-    x:Class="SmartOtp.Views.SettingsView"
+    x:Class="SmartOtp.Views.HotpView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:SmartOtp.Views">
@@ -36,24 +36,8 @@
                     <RadioButton Content="Sha256" IsChecked="{Binding IsSha256}" />
                     <RadioButton Content="Sha512" IsChecked="{Binding IsSha512}" />
                 </HorizontalStackLayout>
-                <Label Text="Period" />
-                <Entry
-                    ClearButtonVisibility="WhileEditing"
-                    Keyboard="Numeric"
-                    Placeholder="30"
-                    PlaceholderColor="Black"
-                    Text="{Binding TimeStep}"
-                    TextColor="Black" />
-                <Label Text="Digits" />
-                <Entry
-                    ClearButtonVisibility="WhileEditing"
-                    Keyboard="Numeric"
-                    Placeholder="6"
-                    PlaceholderColor="Black"
-                    Text="{Binding OtpLength}"
-                    TextColor="Black" />
                 <Label Text="Otp Type" />
-                <RadioButton Content="Totp" IsChecked="{Binding IsTotp}" />
+                <RadioButton Content="Hotp" IsChecked="{Binding IsHotp}" />
                 <Label IsVisible="{Binding IsHotp}" Text="Counter" />
                 <Entry
                     IsVisible="{Binding IsHotp}"
@@ -75,18 +59,17 @@
                     Margin="0"
                     Padding="0"
                     BackgroundColor="Transparent"
-                    ColumnDefinitions="*,60"
+                    ColumnDefinitions="*,Auto"
                     ColumnSpacing="10"
                     RowDefinitions="Auto,*"
                     RowSpacing="0">
-
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
                         HorizontalTextAlignment="Start"
                         Text="OTP"
                         TextColor="Gray"
-                        VerticalOptions="Fill"
+                        VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
                     <Label
                         Grid.Row="1"
@@ -97,27 +80,25 @@
                         TextColor="Black"
                         ToolTipProperties.Text="Copy to clipboard">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectCodeCommand}" CommandParameter="{Binding SmartOtpModels.Otp}" />
+                            <TapGestureRecognizer Command="{Binding .SelectCodeCommand}" CommandParameter="{Binding SmartOtpModels.Otp}" />
                         </Label.GestureRecognizers>
                     </Label>
-
                     <Label
                         Grid.Row="0"
                         Grid.Column="1"
-                        HorizontalTextAlignment="Start"
-                        Text="Step"
+                        HorizontalTextAlignment="Center"
+                        Text="Counter"
                         TextColor="Gray"
-                        VerticalOptions="Fill"
+                        VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
-
                     <Label
                         Grid.Row="1"
                         Grid.Column="1"
                         FontSize="25"
                         HorizontalTextAlignment="Start"
-                        Text="{Binding SmartOtpModels.PeriodView}"
+                        Text="{Binding SmartOtpModels.Counter}"
                         TextColor="Black"
-                        VerticalOptions="Fill"
+                        VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
                 </Grid>
             </VerticalStackLayout>

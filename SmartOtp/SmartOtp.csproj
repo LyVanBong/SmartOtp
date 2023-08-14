@@ -78,6 +78,9 @@
 	  <Compile Update="Views\HomeView.xaml.cs">
 	    <DependentUpon>HomeView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\HotpView.xaml.cs">
+	    <DependentUpon>HotpView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ScanQrCodeView.xaml.cs">
 	    <DependentUpon>ScanQrCodeView.xaml</DependentUpon>
 	  </Compile>
