@@ -3,6 +3,7 @@
 public class OtpService : IOtpService
 {
     private List<SmartOtpModel> _otps = new();
+
     public bool SaveOtp(SmartOtpModel otp)
     {
         _otps.Add(otp);

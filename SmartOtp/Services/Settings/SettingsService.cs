@@ -9,6 +9,7 @@ public class SettingsService : ISettingsService
         get => Preferences.Get(nameof(Counter), 0L);
         set => Preferences.Set(nameof(Counter), value);
     }
+
     public bool IsSha1
     {
         get => Preferences.Get(nameof(IsSha1), true);
@@ -20,33 +21,38 @@ public class SettingsService : ISettingsService
         get => Preferences.Get(nameof(IsSha256), false);
         set => Preferences.Set(nameof(IsSha256), value);
     }
+
     public bool IsSha512
     {
         get => Preferences.Get(nameof(IsSha512), false);
         set => Preferences.Set(nameof(IsSha512), value);
     }
+
     public int Digits
     {
         get => Preferences.Get(nameof(Digits), 6);
         set => Preferences.Set(nameof(Digits), value);
     }
+
     public int Period
     {
         get => Preferences.Get(nameof(Period), 30);
         set => Preferences.Set(nameof(Period), value);
     }
+
     public bool IsTotp
     {
         get => Preferences.Get(nameof(IsTotp), true);
         set => Preferences.Set(nameof(IsTotp), value);
     }
+
     public bool IsHotp
     {
         get => Preferences.Get(nameof(IsHotp), false);
         set => Preferences.Set(nameof(IsHotp), value);
     }
 
-    #endregion
+    #endregion Settings Properties
 
     #region Settings Methods
 
@@ -69,5 +75,5 @@ public class SettingsService : ISettingsService
         Counter = counter;
     }
 
-    #endregion
+    #endregion Settings Methods
 }

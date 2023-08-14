@@ -3,6 +3,7 @@
 public class DatabaseService : IDatabaseService
 {
     private SQLiteConnection _db;
+
     public DatabaseService()
     {
         Initialize();

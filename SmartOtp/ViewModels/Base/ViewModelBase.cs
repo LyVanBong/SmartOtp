@@ -3,8 +3,10 @@
 public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
 {
     private long _isBusy;
+
     [ObservableProperty]
     private bool _isInitialized;
+
     private readonly INavigationService _navigationService;
     private readonly IAsyncRelayCommand _initializeAsyncCommand;
     private string _title;

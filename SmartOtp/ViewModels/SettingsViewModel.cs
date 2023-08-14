@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using Microsoft.Maui;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace SmartOtp.ViewModels;
+﻿namespace SmartOtp.ViewModels;
 
 public class SettingsViewModel : ViewModelBase
 {
@@ -58,6 +54,7 @@ public class SettingsViewModel : ViewModelBase
     }
 
     public ICommand SaveSettingsCommand { get; private set; }
+
     public SettingsViewModel(INavigationService navigationService, ISettingsService settingsService) : base(navigationService)
     {
         Title = "Settings";

@@ -3,6 +3,7 @@
 public class AddCodeViewModel : ViewModelBase
 {
     public ICommand AddCodeCommand { get; private set; }
+
     public AddCodeViewModel(INavigationService navigationService) : base(navigationService)
     {
         Title = "Add Code";
@@ -20,6 +21,5 @@ public class AddCodeViewModel : ViewModelBase
         if (key == "2")
             return NavigationService.NavigateToAsync(Routes.CreateQrCode);
         return Task.CompletedTask;
-
     }
 }

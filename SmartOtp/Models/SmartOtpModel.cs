@@ -1,4 +1,5 @@
 ﻿namespace SmartOtp.Models;
+
 [Table(nameof(SmartOtpModel))]
 public class SmartOtpModel : ObservableObject
 {
@@ -50,12 +51,16 @@ public class SmartOtpModel : ObservableObject
 
     public long Counter { get; set; }
     public DateTime CreateTime { get; set; } = DateTime.Now;
+
     // HashType
     public bool IsSha1 { get; set; }
+
     public bool IsSha256 { get; set; }
     public bool IsSha512 { get; set; }
+
     // OtpType
     public bool IsTotp { get; set; }
+
     /// <summary>
     /// OtpHashMode
     /// </summary>
@@ -63,11 +68,11 @@ public class SmartOtpModel : ObservableObject
     public OtpHashMode HashMode()
     {
         if (IsSha1)
-            return OtpNet.OtpHashMode.Sha1;
+            return OtpHashMode.Sha1;
         if (IsSha256)
             return OtpHashMode.Sha256;
         if (IsSha512)
             return OtpHashMode.Sha512;
-        return OtpNet.OtpHashMode.Sha1;
+        return OtpHashMode.Sha1;
     }
 }

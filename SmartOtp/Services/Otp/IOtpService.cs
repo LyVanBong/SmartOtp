@@ -3,5 +3,6 @@
 public interface IOtpService
 {
     bool SaveOtp(SmartOtpModel otp);
+
     IEnumerable<SmartOtpModel> GetOtps();
 }

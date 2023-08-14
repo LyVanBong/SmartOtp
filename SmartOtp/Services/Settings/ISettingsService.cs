@@ -10,6 +10,7 @@ public interface ISettingsService
     public int Period { get; set; }
     public bool IsTotp { get; set; }
     public bool IsHotp { get; set; }
+
     /// <summary>
     /// Save settings
     /// </summary>
