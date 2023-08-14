@@ -1,4 +1,6 @@
-﻿namespace SmartOtp.Models;
+﻿using System.Text;
+
+namespace SmartOtp.Models;
 
 [Table(nameof(SmartOtpModel))]
 public class SmartOtpModel : ObservableObject
@@ -74,5 +76,32 @@ public class SmartOtpModel : ObservableObject
         if (IsSha512)
             return OtpHashMode.Sha512;
         return OtpHashMode.Sha1;
+    }
+    /// <summary>
+    /// Convert string to byte[]
+    /// </summary>
+    /// <returns></returns>
+    public byte[] GetSecret()
+    {
+        return Encoding.UTF8.GetBytes(Secret);
+    }
+
+    public void UpdateHotp(string otp = null)
+    {
+        PeriodView--;
+        Progress = (float)PeriodView / Period;
+        if (PeriodView == 1)
+        {
+            Otp = otp;
+            Counter = long.Parse(Otp);
+            PeriodView = Period;
+        }
+    }
+
+    public void UpdateTotp(string otp = null, int period = 0)
+    {
+        PeriodView = period;
+        Otp = otp;
+        Progress = (float)PeriodView / Period;
     }
 }

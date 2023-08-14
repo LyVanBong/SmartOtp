@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Text;
 
 namespace SmartOtp.ViewModels;
 
@@ -89,25 +88,25 @@ public class HomeViewModel : ViewModelBase
 
     private Task UpdateHotpAsync(SmartOtpModel smartOtpModel)
     {
+        var hotp = new Hotp(secretKey: smartOtpModel.GetSecret(),
+            mode: smartOtpModel.HashMode(),
+            hotpSize: smartOtpModel.Digits);
 
+        smartOtpModel.UpdateHotp(hotp.ComputeHOTP(smartOtpModel.Counter));
 
         return Task.CompletedTask;
     }
 
     private Task UpdateTotpAsync(SmartOtpModel smartOtpModel)
     {
-        var secret = Encoding.UTF8.GetBytes(smartOtpModel.Secret);
-        var totp = new Totp(secretKey: secret, step: smartOtpModel.Period, totpSize: smartOtpModel.Digits, mode: smartOtpModel.HashMode());
+        var totp = new Totp(secretKey: smartOtpModel.GetSecret(),
+            step: smartOtpModel.Period,
+            totpSize: smartOtpModel.Digits,
+            mode: smartOtpModel.HashMode());
 
         var otp = totp.ComputeTotp(DateTime.Now);
 
-        smartOtpModel.Otp = otp;
-
-        var remainingSeconds = totp.RemainingSeconds(DateTime.Now);
-
-        smartOtpModel.Progress = (float)remainingSeconds / smartOtpModel.Period;
-
-        smartOtpModel.PeriodView = remainingSeconds;
+        smartOtpModel.UpdateTotp(totp.ComputeTotp(DateTime.Now), totp.RemainingSeconds(DateTime.Now));
 
         return Task.CompletedTask;
     }
