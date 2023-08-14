@@ -36,8 +36,7 @@
                     <RadioButton Content="Sha256" IsChecked="{Binding IsSha256}" />
                     <RadioButton Content="Sha512" IsChecked="{Binding IsSha512}" />
                 </HorizontalStackLayout>
-                <Label Text="Otp Type" />
-                <RadioButton Content="Hotp" IsChecked="{Binding IsHotp}" />
+
                 <Label IsVisible="{Binding IsHotp}" Text="Counter" />
                 <Entry
                     IsVisible="{Binding IsHotp}"
@@ -53,7 +52,7 @@
                     Command="{Binding SaveSettingsCommand}"
                     CornerRadius="5"
                     FontAttributes="Bold"
-                    Text="Add Code"
+                    Text="Generate"
                     TextColor="White" />
                 <Grid
                     Margin="0"

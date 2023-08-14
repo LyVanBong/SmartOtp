@@ -52,8 +52,7 @@
                     PlaceholderColor="Black"
                     Text="{Binding OtpLength}"
                     TextColor="Black" />
-                <Label Text="Otp Type" />
-                <RadioButton Content="Totp" IsChecked="{Binding IsTotp}" />
+
                 <Label IsVisible="{Binding IsHotp}" Text="Counter" />
                 <Entry
                     IsVisible="{Binding IsHotp}"
@@ -69,7 +68,7 @@
                     Command="{Binding SaveSettingsCommand}"
                     CornerRadius="5"
                     FontAttributes="Bold"
-                    Text="Add Code"
+                    Text="Generate"
                     TextColor="White" />
                 <Grid
                     Margin="0"
@@ -105,7 +104,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalTextAlignment="Start"
-                        Text="Step"
+                        Text="Period"
                         TextColor="Gray"
                         VerticalOptions="Fill"
                         VerticalTextAlignment="Center" />
