@@ -13,6 +13,7 @@
         /// </summary>
         private static void InitializeRouting()
         {
+            Routing.RegisterRoute(Routes.Hotp, typeof(HotpView));
             Routing.RegisterRoute(Routes.CreateQrCode, typeof(CreateQrCodeView));
             Routing.RegisterRoute(Routes.SetupCode, typeof(SetupCodeView));
             Routing.RegisterRoute(Routes.ScanQrCode, typeof(ScanQrCodeView));

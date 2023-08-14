@@ -1,16 +1,16 @@
-﻿namespace SmartOtp.ViewModels;
+﻿
+namespace SmartOtp.ViewModels;
 
-public class SettingsViewModel : ViewModelBase
+public class HotpViewModel : ViewModelBase
 {
     private bool _isSha1 = true;
     private bool _isSha256;
     private bool _isSha512;
     private int _otpLength = 6;
     private int _timeStep = 30;
-    private bool _isTotp = true;
-    private bool _isHotp;
+    private bool _isTotp;
+    private bool _isHotp = true;
     private SmartOtpModel _smartOtpModels = new();
-    private IDispatcherTimer _timer;
     private string _secret;
     private long _counter;
 
@@ -76,7 +76,7 @@ public class SettingsViewModel : ViewModelBase
         set => SetProperty(ref _smartOtpModels, value);
     }
     public ICommand SelectCodeCommand { get; private set; }
-    public SettingsViewModel(INavigationService navigationService) : base(navigationService)
+    public HotpViewModel(INavigationService navigationService) : base(navigationService)
     {
         SaveSettingsCommand = new AsyncRelayCommand(SaveSettings);
         SelectCodeCommand = new AsyncRelayCommand<string>(SelectCodeAsync);
@@ -88,42 +88,18 @@ public class SettingsViewModel : ViewModelBase
         await Clipboard.Default.SetTextAsync(arg);
         await ToastMessage("Copy to clipboard: " + arg);
     }
-    public override Task InitializeAsync()
-    {
-        if (_timer == null || !_timer.IsRunning)
-        {
-            var myapp = Application.Current;
-            if (myapp != null)
-            {
-                _timer = myapp.Dispatcher.CreateTimer();
-                _timer.Interval = TimeSpan.FromSeconds(1);
-                _timer.Tick += (s, e) => Timer_Tick(s, e);
-                _timer.Start();
-            }
-        }
 
-        return base.InitializeAsync();
-    }
-    private Task Timer_Tick(object sender, EventArgs eventArgs)
+    private Task UpdateHotpAsync(SmartOtpModel smartOtpModel)
     {
-        if (!string.IsNullOrWhiteSpace(SmartOtpModels.Secret))
-            _ = UpdateTotpAsync(SmartOtpModels);
+        var hotp = new Hotp(secretKey: smartOtpModel.GetSecret(),
+            mode: smartOtpModel.HashMode(),
+            hotpSize: smartOtpModel.Digits);
+
+        smartOtpModel.UpdateHotp(hotp.ComputeHOTP(smartOtpModel.Counter));
+
         return Task.CompletedTask;
     }
 
-    private Task UpdateTotpAsync(SmartOtpModel smartOtpModel)
-    {
-        var totp = new Totp(secretKey: smartOtpModel.GetSecret(),
-            step: smartOtpModel.Period,
-            totpSize: smartOtpModel.Digits,
-            mode: smartOtpModel.HashMode());
-
-        var otp = totp.ComputeTotp(DateTime.Now);
-
-        smartOtpModel.UpdateTotp(totp.ComputeTotp(DateTime.Now), totp.RemainingSeconds(DateTime.Now));
-
-        return Task.CompletedTask;
-    }
     private async Task SaveSettings()
     {
         if (string.IsNullOrEmpty(Secret))
@@ -144,6 +120,8 @@ public class SettingsViewModel : ViewModelBase
             PeriodView = TimeStep,
             Counter = Counter,
         };
+
+        _ = UpdateHotpAsync(SmartOtpModels);
 
         await ToastMessage("Add Code Done");
 

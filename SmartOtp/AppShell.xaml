@@ -6,23 +6,17 @@
     xmlns:smartOtp="clr-namespace:SmartOtp"
     xmlns:views="clr-namespace:SmartOtp.Views">
     <TabBar Route="Main">
-        <Tab Title="Home" Icon="icons_home.png">
+        <Tab Title="TOTP">
             <ShellContent
-                Title="Home"
-                ContentTemplate="{DataTemplate views:HomeView}"
-                Route="{x:Static smartOtp:Routes.Home}" />
-        </Tab>
-        <Tab Title="Add Code" Icon="icons_add_code.png">
-            <ShellContent
-                Title="Add Code"
-                ContentTemplate="{DataTemplate views:AddCodeView}"
-                Route="{x:Static smartOtp:Routes.AddCode}" />
-        </Tab>
-        <Tab Title="Settings" Icon="icons_setting.png">
-            <ShellContent
-                Title="Settings"
+                Title="TOTP"
                 ContentTemplate="{DataTemplate views:SettingsView}"
                 Route="{x:Static smartOtp:Routes.Settings}" />
+        </Tab>
+        <Tab Title="HOTP">
+            <ShellContent
+                Title="HOTP"
+                ContentTemplate="{DataTemplate views:HotpView}"
+                Route="{x:Static smartOtp:Routes.Hotp}" />
         </Tab>
     </TabBar>
 </Shell>
