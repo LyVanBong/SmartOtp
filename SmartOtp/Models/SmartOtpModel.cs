@@ -100,7 +100,7 @@ public class SmartOtpModel : ObservableObject
         Otp = otp;
         if (PeriodView == 1)
         {
-            Counter = long.Parse(Otp);
+            Counter++;
             PeriodView = Period;
         }
     }

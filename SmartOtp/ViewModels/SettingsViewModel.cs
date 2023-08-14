@@ -14,6 +14,13 @@ public class SettingsViewModel : ViewModelBase
     private ObservableCollection<SmartOtpModel> _smartOtpModels = new();
     private IDispatcherTimer _timer;
     private string _secret;
+    private long _counter;
+
+    public long Counter
+    {
+        get => _counter;
+        set => SetProperty(ref _counter, value);
+    }
 
     public bool IsSha1
     {
@@ -167,6 +174,7 @@ public class SettingsViewModel : ViewModelBase
             Period = TimeStep,
             Digits = OtpLength,
             PeriodView = TimeStep,
+            Counter = Counter,
         };
 
         SmartOtpModels.Add(otp);

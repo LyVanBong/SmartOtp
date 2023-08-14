@@ -71,6 +71,12 @@
                     <RadioButton Content="Totp" IsChecked="{Binding IsTotp}" />
                     <RadioButton Content="Hotp" IsChecked="{Binding IsHotp}" />
                 </HorizontalStackLayout>
+                <Label IsVisible="{Binding IsHotp}" Text="Counter" />
+                <Entry
+                    IsVisible="{Binding IsHotp}"
+                    Keyboard="Numeric"
+                    Placeholder="Enter Counter"
+                    Text="{Binding Counter}" />
                 <Label Text="Secret" />
                 <Entry
                     Keyboard="Text"
