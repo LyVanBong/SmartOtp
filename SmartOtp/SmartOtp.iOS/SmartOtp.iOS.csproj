@@ -142,4 +142,10 @@
       <Name>SmartOtp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\totp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\hotp.png" />
+  </ItemGroup>
 </Project>
