@@ -39,24 +39,31 @@
                             </Style>
                         </ResourceDictionary>
                     </StackLayout.Resources>
-                    <RadioButton Content="Sha1" IsChecked="{Binding IsSha1}" />
-                    <RadioButton Content="Sha256" IsChecked="{Binding IsSha256}" />
-                    <RadioButton Content="Sha512" IsChecked="{Binding IsSha512}" />
+                    <RadioButton Content="Sha1" IsChecked="{Binding HotpModel.IsSha1}" />
+                    <RadioButton Content="Sha256" IsChecked="{Binding HotpModel.IsSha256}" />
+                    <RadioButton Content="Sha512" IsChecked="{Binding HotpModel.IsSha512}" />
                 </StackLayout>
 
-                <Label IsVisible="{Binding IsHotp}" Text="Counter" />
+                <Label Text="Counter" />
                 <Entry
-                    IsVisible="{Binding IsHotp}"
                     Keyboard="Numeric"
                     Placeholder="Enter Counter"
-                    Text="{Binding Counter}" />
+                    Text="{Binding HotpModel.Counter}" />
+                <Label Text="Digits" />
+                <Entry
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Numeric"
+                    Placeholder="6"
+                    PlaceholderColor="Black"
+                    Text="{Binding HotpModel.Digits}"
+                    TextColor="Black" />
                 <Label Text="Secret" />
                 <Entry
                     Keyboard="Text"
                     Placeholder="Enter Secret"
-                    Text="{Binding Secret}" />
+                    Text="{Binding HotpModel.Secret}" />
                 <Button
-                    Command="{Binding SaveSettingsCommand}"
+                    Command="{Binding GenerateCommand}"
                     CornerRadius="5"
                     FontAttributes="Bold"
                     Text="Generate"
@@ -82,10 +89,10 @@
                         Grid.Column="0"
                         FontAttributes="Bold"
                         FontSize="40"
-                        Text="{Binding SmartOtpModels.Otp}"
+                        Text="{Binding Otp}"
                         TextColor="Black">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding .SelectCodeCommand}" CommandParameter="{Binding SmartOtpModels.Otp}" />
+                            <TapGestureRecognizer Command="{Binding CopyCommand}" CommandParameter="{Binding Otp}" />
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
@@ -101,7 +108,7 @@
                         Grid.Column="1"
                         FontSize="25"
                         HorizontalTextAlignment="Start"
-                        Text="{Binding SmartOtpModels.Counter}"
+                        Text="{Binding Counter}"
                         TextColor="Black"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center" />

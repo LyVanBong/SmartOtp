@@ -84,14 +84,9 @@ namespace SmartOtp.ViewModels
                     Digits = TotpModel.Digits,
                     Secret = TotpModel.Secret,
                 };
-
+                TotpModel.Secret = string.Empty;
                 await Application.Current.MainPage.DisplayToastAsync("Tạo mã thành công");
             }
-        }
-
-        private Task Clear()
-        {
-            return Task.CompletedTask;
         }
     }
 }
