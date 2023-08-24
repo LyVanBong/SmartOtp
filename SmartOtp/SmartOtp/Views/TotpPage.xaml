@@ -3,7 +3,11 @@
     x:Class="SmartOtp.Views.TotpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:SmartOtp.ViewModels;assembly=SmartOtp"
     Title="TOTP">
+    <ContentPage.BindingContext>
+        <viewModels:TotpViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout
@@ -35,9 +39,9 @@
                             </Style>
                         </ResourceDictionary>
                     </StackLayout.Resources>
-                    <RadioButton Content="Sha1" IsChecked="{Binding IsSha1}" />
-                    <RadioButton Content="Sha256" IsChecked="{Binding IsSha256}" />
-                    <RadioButton Content="Sha512" IsChecked="{Binding IsSha512}" />
+                    <RadioButton Content="Sha1" IsChecked="{Binding TotpModel.IsSha1}" />
+                    <RadioButton Content="Sha256" IsChecked="{Binding TotpModel.IsSha256}" />
+                    <RadioButton Content="Sha512" IsChecked="{Binding TotpModel.IsSha512}" />
                 </StackLayout>
                 <Label Text="Period" />
                 <Entry
@@ -45,7 +49,7 @@
                     Keyboard="Numeric"
                     Placeholder="30"
                     PlaceholderColor="Black"
-                    Text="{Binding TimeStep}"
+                    Text="{Binding TotpModel.Period}"
                     TextColor="Black" />
                 <Label Text="Digits" />
                 <Entry
@@ -53,22 +57,15 @@
                     Keyboard="Numeric"
                     Placeholder="6"
                     PlaceholderColor="Black"
-                    Text="{Binding OtpLength}"
+                    Text="{Binding TotpModel.Digits}"
                     TextColor="Black" />
-
-                <Label IsVisible="{Binding IsHotp}" Text="Counter" />
-                <Entry
-                    IsVisible="{Binding IsHotp}"
-                    Keyboard="Numeric"
-                    Placeholder="Enter Counter"
-                    Text="{Binding Counter}" />
                 <Label Text="Secret" />
                 <Entry
                     Keyboard="Text"
                     Placeholder="Enter Secret"
-                    Text="{Binding Secret}" />
+                    Text="{Binding TotpModel.Secret}" />
                 <Button
-                    Command="{Binding SaveSettingsCommand}"
+                    Command="{Binding GenerateCommand}"
                     CornerRadius="5"
                     FontAttributes="Bold"
                     Text="Generate"
@@ -95,10 +92,10 @@
                         Grid.Column="0"
                         FontAttributes="Bold"
                         FontSize="40"
-                        Text="{Binding SmartOtpModels.Otp}"
+                        Text="{Binding Otp}"
                         TextColor="Black">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectCodeCommand}" CommandParameter="{Binding SmartOtpModels.Otp}" />
+                            <TapGestureRecognizer Command="{Binding CopyCommand}" CommandParameter="{Binding Otp}" />
                         </Label.GestureRecognizers>
                     </Label>
 
@@ -116,7 +113,7 @@
                         Grid.Column="1"
                         FontSize="25"
                         HorizontalTextAlignment="Start"
-                        Text="{Binding SmartOtpModels.PeriodView}"
+                        Text="{Binding PeriodView}"
                         TextColor="Black"
                         VerticalOptions="Fill"
                         VerticalTextAlignment="Center" />
