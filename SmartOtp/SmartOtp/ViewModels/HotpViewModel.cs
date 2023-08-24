@@ -1,6 +1,5 @@
 ﻿using OtpNet;
 using SmartOtp.Models;
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.Extensions;
@@ -13,7 +12,6 @@ namespace SmartOtp.ViewModels
     public class HotpViewModel : ViewModelBase
     {
         private HotpModel _hotpModel = new HotpModel();
-        private HotpModel _saveHotp = null;
         private string _otp;
         private string _counter;
 
@@ -42,17 +40,6 @@ namespace SmartOtp.ViewModels
         {
             GenerateCommand = new AsyncCommand(Generate);
             CopyCommand = new AsyncCommand<string>(Copy);
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
-                if (_saveHotp != null)
-                {
-                    var key = Base32Encoding.ToBytes(_saveHotp.Secret);
-                    var hotp = new Hotp(secretKey: key, hotpSize: _saveHotp.Digits, mode: _saveHotp.OtpMode());
-                    Otp = hotp.ComputeHOTP(_saveHotp.Counter);
-                    Counter = _saveHotp.Counter + "";
-                }
-                return true;
-            });
         }
 
         private async Task Generate()
@@ -63,15 +50,10 @@ namespace SmartOtp.ViewModels
             }
             else
             {
-                _saveHotp = new HotpModel
-                {
-                    IsSha1 = HotpModel.IsSha1,
-                    IsSha512 = HotpModel.IsSha512,
-                    IsSha256 = HotpModel.IsSha256,
-                    Counter = HotpModel.Counter,
-                    Secret = HotpModel.Secret,
-                    Digits = HotpModel.Digits,
-                };
+                var key = Base32Encoding.ToBytes(HotpModel.Secret);
+                var hotp = new Hotp(secretKey: key, hotpSize: HotpModel.Digits, mode: HotpModel.OtpMode());
+                Otp = hotp.ComputeHOTP(HotpModel.Counter);
+                Counter = HotpModel.Counter + "";
                 HotpModel.Secret = string.Empty;
                 await Application.Current.MainPage.DisplayToastAsync("Tạo mã thành công");
             }
