@@ -11,6 +11,5 @@ namespace SmartOtp
             Routing.RegisterRoute(nameof(TotpPage), typeof(TotpPage));
             Routing.RegisterRoute(nameof(HotpPage), typeof(HotpPage));
         }
-
     }
 }

@@ -37,6 +37,7 @@ namespace SmartOtp.ViewModels
 
         public ICommand CopyCommand { get; private set; }
         public ICommand GenerateCommand { get; private set; }
+
         public HotpViewModel()
         {
             GenerateCommand = new AsyncCommand(Generate);

@@ -1,6 +1,6 @@
-﻿using System;
-using OtpNet;
+﻿using OtpNet;
 using SmartOtp.Models;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.Extensions;

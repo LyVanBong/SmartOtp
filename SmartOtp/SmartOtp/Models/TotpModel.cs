@@ -49,6 +49,7 @@ namespace SmartOtp.Models
             get => _secret;
             set => SetField(ref _secret, value);
         }
+
         public OtpHashMode OtpMode()
         {
             if (IsSha256)
@@ -57,6 +58,7 @@ namespace SmartOtp.Models
                 return OtpHashMode.Sha512;
             return OtpHashMode.Sha1;
         }
+
         #region NotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -74,6 +76,6 @@ namespace SmartOtp.Models
             return true;
         }
 
-        #endregion
+        #endregion NotifyPropertyChanged
     }
 }
