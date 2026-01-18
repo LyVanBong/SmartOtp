@@ -1,27 +1,19 @@
-# SmartOtp
+# SmartOtp 🔐
+> Ứng dụng tạo mã xác thực 2 bước (2FA/TOTP) bảo mật cao.
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/LyVanBong/SmartOtp)
-![GitHub issues](https://img.shields.io/github/issues/LyVanBong/SmartOtp)
-![GitHub stars](https://img.shields.io/github/stars/LyVanBong/SmartOtp)
 
 ## 📝 Giới Thiệu
-Smart Otp
+**SmartOtp** là ứng dụng di động giúp người dùng quản lý và tạo các mã OTP (Time-based One-Time Password) theo chuẩn RFC 6238. Ứng dụng hoạt động offline hoàn toàn, đảm bảo an toàn dữ liệu.
 
-Đây là một trong những dự án mã nguồn mở được phát triển và duy trì bởi **LyVanBong**. Mã nguồn được chia sẻ với mục đích học tập và đóng góp cho cộng đồng.
+## ✨ Tính Năng
+-   **Quét QR Code**: Thêm tài khoản nhanh chóng.
+-   **Bảo mật**: Khóa ứng dụng bằng mã PIN/Vân tay (Biometric).
+-   **Sao lưu**: Hỗ trợ Backup/Restore dữ liệu mã hóa (đang phát triển).
 
-## 🚀 Tính Năng
-- [x] Đang cập nhật...
-- [ ] Tính năng nổi bật sẽ được liệt kê tại đây.
-
-## 🛠 Cài Đặt
-Hướng dẫn cài đặt và sử dụng sẽ sớm được cập nhật.
-
-```bash
-# Clone dự án
-git clone https://github.com/LyVanBong/SmartOtp.git
-```
+## 🛠 Công Nghệ
+-   **Nền tảng**: Xamarin.Forms (Android & iOS).
+-   **Lưu trữ**: SQLite / SecureStorage.
 
 ## 📞 Liên Hệ
-Nếu bạn có câu hỏi hoặc muốn đóng góp, vui lòng liên hệ:
-- **GitHub**: [LyVanBong](https://github.com/LyVanBong)
-- **Website**: [softty.net](https://softty.net)
+-   **GitHub**: [LyVanBong](https://github.com/LyVanBong)
