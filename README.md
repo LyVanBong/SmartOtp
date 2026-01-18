@@ -1,3 +1,30 @@
 # SmartOtp
-![image](https://github.com/LyVanBong/SmartOtp/assets/87922239/edf1a608-770a-4712-ac89-7e5b48ca03df)
-![image](https://github.com/LyVanBong/SmartOtp/assets/87922239/55ae93a2-4669-4a5f-b1e6-86aaa19f334c)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/LyVanBong/SmartOtp)
+![GitHub issues](https://img.shields.io/github/issues/LyVanBong/SmartOtp)
+![GitHub stars](https://img.shields.io/github/stars/LyVanBong/SmartOtp)
+
+## 📝 Giới Thiệu
+Smart Otp
+
+Đây là một trong những dự án mã nguồn mở được phát triển và duy trì bởi **LyVanBong**. Mã nguồn được chia sẻ với mục đích học tập và đóng góp cho cộng đồng.
+
+## 🚀 Tính Năng
+- [x] Đang cập nhật...
+- [ ] Tính năng nổi bật sẽ được liệt kê tại đây.
+
+## 🛠 Cài Đặt
+Hướng dẫn cài đặt và sử dụng sẽ sớm được cập nhật.
+
+```bash
+# Clone dự án
+git clone https://github.com/LyVanBong/SmartOtp.git
+```
+
+## 📞 Liên Hệ
+Nếu bạn có câu hỏi hoặc muốn đóng góp, vui lòng liên hệ:
+- **GitHub**: [LyVanBong](https://github.com/LyVanBong)
+- **Website**: [softty.net](https://softty.net)
+
+---
+*README được tạo tự động bởi trợ lý AI.*
